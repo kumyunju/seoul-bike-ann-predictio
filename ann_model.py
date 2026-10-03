@@ -89,18 +89,3 @@ plt.plot(
 
 plt.tight_layout()
 plt.show()
-# 11. 사용자가 기온을 입력하여 대여량 예측
-temperature = float(input("예측할 기온을 입력하세요(°C): "))
-
-# 입력한 기온을 정규화
-new_temperature = scaler.transform(
-    [[temperature]]
-)
-
-# 자전거 대여량 예측
-predicted_count = model.predict(new_temperature)
-
-print()
-print("===== 새로운 기온의 자전거 대여량 예측 =====")
-print("입력한 기온:", temperature, "°C")
-print("예상 자전거 대여량:", round(predicted_count[0]), "대")
