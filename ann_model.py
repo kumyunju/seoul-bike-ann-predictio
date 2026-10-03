@@ -89,3 +89,23 @@ plt.plot(
 
 plt.tight_layout()
 plt.show()
+# 11. 사용자가 기온을 입력하여 대여량 예측
+temperature = float(input("예측할 기온을 입력하세요(°C): "))
+
+# 입력한 기온을 정규화
+new_temperature = x_scaler.transform(
+    pd.DataFrame([[temperature]], columns=["Temperature(°C)"])
+)
+
+# 자전거 대여량 예측
+predicted_scaled = model.predict(new_temperature)
+
+# 원래 대여량 단위로 변환
+predicted_count = y_scaler.inverse_transform(
+    predicted_scaled.reshape(-1, 1)
+)[0][0]
+
+print()
+print("===== 새로운 기온의 자전거 대여량 예측 =====")
+print("입력한 기온:", temperature, "°C")
+print("예상 자전거 대여량:", round(predicted_count), "대")
